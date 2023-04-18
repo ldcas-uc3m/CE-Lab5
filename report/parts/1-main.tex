@@ -1,0 +1,21 @@
+\section*{Activitiy 1}
+
+\begin{enumerate}
+
+    \item The main vulnerability on the \texttt{Low} setting is that it executes a ping command and appends whatever is in the textbox to the end of that command, without any input validation.\\
+    This gives the attacker the capability of executing any commands as the same user as the application, effectively giving access to a backdoor terminal by using command concatenation.\\
+    For example, by inserting \texttt{; whoami ; pwd} (resulting in the command \texttt{ping -c ; whoami ; pwd}\footnote{The \texttt{;} concatenator in a Linux shell allows the execution of a command regardless of the output of the previous command. In this case, the \texttt{ping} command will fail, but it will still execute the rest of the commands.}), we can obtain the user the shell is executing as (\texttt{www-data}) and the current working directory (\texttt{/var/www/dvwa/vulnerabilities/exec}).
+    \item The \texttt{Medium} setting improves things by filtering out the \texttt{;} and \texttt{\&\&} concatenators, but this still leaves some things, like pipes or redirection, enabled.\\
+    We can directly use a pipe to execute any command\footnote{As a pipe only redirects \texttt{stdout} and not \texttt{stderr}, by purposely making the \texttt{ping} command fail by not giving it an argument, enabling us to effectively concatenate another command.} e.g. \texttt{| whoami} (resulting in \texttt{ping -c | whoami}).\newline
+    
+    The \texttt{High} setting is even more strict, by validating the input. It splits the input into an array by using the \texttt{.} separator and checks that the first four numbers are integers, re-generating the IP using only those first four numbers.\\
+    I didn't find any way to exploit it.
+    
+\end{enumerate}
+
+
+\section*{Activitiy 2}
+
+\begin{enumerate}
+    \item 
+\end{enumerate}

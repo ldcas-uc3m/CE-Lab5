@@ -7,7 +7,7 @@ Universidad Carlos III de Madrid
 ## Project statement
 The goal of this lab is to practice some of the web security concepts studied in class.  
 
-To do the lab, you will need the same setting used in [Lab 4](https://github.com/ldcas-uc3m/CE-Lab4) (or see [Installation and execution](#installation-and-execution)).  
+To do the lab, you will need the same settings used in [Lab 4](https://github.com/ldcas-uc3m/CE-Lab4) (or see [Installation and execution](#installation-and-execution)).  
 In the following, we assume the Metaexploitable2 machine runs in `192.168.56.3`.
 
 ### Activities
