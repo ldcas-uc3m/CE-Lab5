@@ -19,7 +19,7 @@ Click on `DVWA Security` and select `Low`. Click on `Command Execution` and then
     1. Perform a basic SQL injection to retrieve all tables in the MySQL database. (Hint: find out how this is named in MySQL.)
     2. Using the output of the previous step, locate the table listing all users and find out all the column fields for each user.
     3. Retrieve the list of users and their passwords (hashes)
-    4. **Bonus:** use John the Ripper to break one password (put `username:hash` in `pwd.txt`, and run `john --format=raw-MD5 pwd.txt`)
+    4. **Bonus:** use John the Ripper to break one password (put `<username>:<hash>` in `pwd.txt`, and run `john --format=raw-MD5 pwd.txt`)
 3. Click on `CSRF` with `DVWA Security` set to `Low` and check how the password is changed (look at the HTTP method and how the username and new password is sent). Take note of this.
     1. Open up a terminal window and use `curl` to change the password for an arbitrary user using what you have learned in the CSRF box. Can you do it? Why?
     2. Click on `XSS Reflected`, inspect the source code, and figure out how to exploit it to retrieve the session cookie (`document.cookie`).
@@ -52,3 +52,9 @@ Note that you can use any other Linux distro, just make sure you install [`nmap`
 4. Attach both machines to this network (`Machine` > `Settings` > `Network` → `Attached-to`: `Host-only Adapter`, and select the virtual network name from the drop down menu).
 5. Run both machines and check their IPs with `ifconfig`. Remember you can change the keyboard layout in `Settings` > `Keyboard` > `Layout`.
 6. Check the machines reach each other by performing a `ping` from one machine to the other.
+
+## Extra information
+- Check [Computer Security Student](https://www.computersecuritystudent.com/cgi-bin/CSS/process_request_v3.pl?HID=688b0913be93a4d95daed400990c4745&TYPE=SUB) for in-deph DVWA turorials.
+- [Remote Code Execution](https://es.scribd.com/document/2530476/Php-Endangers-Remote-Code-Execution)
+- [SQL injection](http://www.unixwiz.net/techtips/sql-injection.html)
+- [Cross Site Request Forgery (CSRF)](https://owasp.org/www-community/attacks/csrf)
