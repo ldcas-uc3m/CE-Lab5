@@ -54,7 +54,7 @@ Note that you can use any other Linux distro, just make sure you install [`nmap`
 6. Check the machines reach each other by performing a `ping` from one machine to the other.
 
 ## Extra information
-- Check [Computer Security Student](https://www.computersecuritystudent.com/cgi-bin/CSS/process_request_v3.pl?HID=688b0913be93a4d95daed400990c4745&TYPE=SUB) for in-deph DVWA turorials.
+- Check [Computer Security Student](https://www.computersecuritystudent.com/cgi-bin/CSS/process_request_v3.pl?HID=688b0913be93a4d95daed400990c4745&TYPE=SUB) for in-deph DVWA turorials
 - [Remote Code Execution](https://es.scribd.com/document/2530476/Php-Endangers-Remote-Code-Execution)
 - [SQL injection](http://www.unixwiz.net/techtips/sql-injection.html)
 - [Cross Site Request Forgery (CSRF)](https://owasp.org/www-community/attacks/csrf)
