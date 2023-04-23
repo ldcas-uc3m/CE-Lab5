@@ -10,20 +10,24 @@ The goal of this lab is to practice some of the web security concepts studied in
 To do the lab, you will need the same settings used in [Lab 4](https://github.com/ldcas-uc3m/CE-Lab4) (or see [Installation and execution](#installation-and-execution)).  
 In the following, we assume the Metaexploitable2 machine runs in `192.168.56.3`.
 
-### Activities
-1. Open a browser window and connect to `http://192.168.56.3`. Use the credentials `admin:password` to log in.  
+### Activity 1
+Open a browser window and connect to `http://192.168.56.3`. Use the credentials `admin:password` to log in.  
 Click on `DVWA Security` and select `Low`. Click on `Command Execution` and then on `View Source`. If you don’t know php, search for the functions and statements in the code and be sure you understand them.
-    1. Describe what vulnerability is present in this code and illustrate with an impactful example how to exploit it.
-    2. **Bonus:** repeat the step above but selecting `Medium` and `High` in the `DVW Security` flag.
-2. Click on `SQL Injection` with `DVWA Security` set to `Low`. Analyze the source code and determine what vulnerability is present.
-    1. Perform a basic SQL injection to retrieve all tables in the MySQL database. (Hint: find out how this is named in MySQL.)
-    2. Using the output of the previous step, locate the table listing all users and find out all the column fields for each user.
-    3. Retrieve the list of users and their passwords (hashes)
-    4. **Bonus:** use John the Ripper to break one password (put `<username>:<hash>` in `pwd.txt`, and run `john --format=raw-MD5 pwd.txt`)
-3. Click on `CSRF` with `DVWA Security` set to `Low` and check how the password is changed (look at the HTTP method and how the username and new password is sent). Take note of this.
-    1. Open up a terminal window and use `curl` to change the password for an arbitrary user using what you have learned in the CSRF box. Can you do it? Why?
-    2. Click on `XSS Reflected`, inspect the source code, and figure out how to exploit it to retrieve the session cookie (`document.cookie`).
-    3. Repeat the first step using the stolen cookie to change the password. Does it work?
+1. Describe what vulnerability is present in this code and illustrate with an impactful example how to exploit it.
+2. **Bonus:** repeat the step above but selecting `Medium` and `High` in the `DVW Security` flag.
+
+### Activity 2
+Click on `SQL Injection` with `DVWA Security` set to `Low`. Analyze the source code and determine what vulnerability is present.
+1. Perform a basic SQL injection to retrieve all tables in the MySQL database. (Hint: find out how this is named in MySQL.)
+2. Using the output of the previous step, locate the table listing all users and find out all the column fields for each user.
+3. Retrieve the list of users and their passwords (hashes)
+4. **Bonus:** use John the Ripper to break one password (put `<username>:<hash>` in `pwd.txt`, and run `john --format=raw-MD5 pwd.txt`)
+    
+### Activity 3
+Click on `CSRF` with `DVWA Security` set to `Low` and check how the password is changed (look at the HTTP method and how the username and new password is sent). Take note of this.
+1. Open up a terminal window and use `curl` to change the password for an arbitrary user using what you have learned in the CSRF box. Can you do it? Why?
+2. Click on `XSS Reflected`, inspect the source code, and figure out how to exploit it to retrieve the session cookie (`document.cookie`).
+3. Repeat the first step using the stolen cookie to change the password. Does it work?
 
 
 ## Installation and execution
